@@ -3,86 +3,638 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Essencial para o Bem-Estar: Alcance Sua Melhor Energia</title>
-    <!-- Inclui o framework Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            @apply bg-slate-50 text-slate-800;
-        }
-    </style>
-    <!-- Ícones via Heroicons (SVG) -->
+    <title>Hipotireoidismo Não É Desculpa</title>
+    
+    <!-- Meta Pixel Code -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary': '#4F46E5', /* Azul Índigo */
-                        'secondary': '#818CF8', /* Azul mais claro */
-                        'accent': '#6EE7B7', /* Verde Menta */
-                    }
-                }
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1120447212954058');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1120447212954058&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: #F8FAFC;
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: #1F2937;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        .progress-container {
+            background: #e0e0e0;
+            height: 12px;
+            border-radius: 6px;
+            margin: 20px 30px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700 0%, #E74C3C 100%);
+            border-radius: 6px;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .question-container {
+            padding: 40px;
+            display: none;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .question-container.active {
+            display: block;
+        }
+        
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #1F2937;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .option {
+            background: #f0f4f7;
+            border: 2px solid #e1e7ec;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-align: left;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .option:hover {
+            background: #e9f0f5;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background: #E74C3C;
+            color: white;
+            border-color: #C0392B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-button {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .nav-button.prev {
+            background: #4B5563;
+            color: white;
+        }
+        
+        .nav-button.next {
+            background: #E74C3C;
+            color: white;
+        }
+        
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .results-container {
+            padding: 40px;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        .results-title {
+            font-size: 2.2rem;
+            color: #E74C3C;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .results-score {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            background: #FFF8EE;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #E74C3C;
+            line-height: 1.6;
+        }
+        
+        .results-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .solution-box {
+            background: #1F2937;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .solution-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .solution-box ul {
+            list-style: none;
+            margin-left: 0;
+            padding-left: 0;
+        }
+        
+        .solution-box li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .solution-box li i {
+            color: #FFD700;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .testimonial-box {
+            background: #fdf6e9;
+            border: 2px solid #E74C3C;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.2);
+            position: relative;
+        }
+
+        .testimonial-box p {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #4B5563;
+        }
+
+        .testimonial-box p:before, .testimonial-box p:after {
+            content: '"';
+            font-size: 2.5rem;
+            color: #E74C3C;
+            position: absolute;
+            font-family: sans-serif;
+            line-height: 0.1;
+        }
+
+        .testimonial-box p:before {
+            top: 10px;
+            left: 20px;
+        }
+
+        .testimonial-box p:after {
+            bottom: 10px;
+            right: 20px;
+        }
+
+        .testimonial-box .author {
+            font-weight: bold;
+            text-align: right;
+            color: #1F2937;
+            font-size: 1rem;
+        }
+
+        .faq-box {
+            background: #FFFFFF;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .faq-box h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #1F2937;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #E74C3C;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            margin-top: 10px;
+            line-height: 1.6;
+            color: #4B5563;
+            display: none;
+            text-align: left;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        .faq-item.open .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #E74C3C, #C0392B);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(192, 57, 43, 0.4);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 10px 20px rgba(192, 57, 43, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 12px 25px rgba(192, 57, 43, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 10px 20px rgba(192, 57, 43, 0.4); }
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(192, 57, 43, 0.6);
+        }
+        
+        .urgency-banner {
+            background: linear-gradient(90deg, #E74C3C 0%, #C0392B 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(192, 57, 43, 0.5);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #1F2937;
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        .footer a {
+            color: #FFD700;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+                box-shadow: none;
+                padding: 0;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .question-text {
+                font-size: 1.3rem;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-button {
+                width: 100%;
+            }
+            .cta-button {
+                font-size: 1.1rem;
+                padding: 15px 30px;
             }
         }
-    </script>
+    </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-
-    <div class="bg-white rounded-2xl shadow-2xl p-6 sm:p-10 max-w-2xl mx-auto my-8 transform transition-transform duration-500 hover:scale-[1.01]">
-        <header class="text-center mb-8 border-b-2 border-slate-100 pb-6">
-            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">Guia Essencial para o Bem-Estar</h1>
-            <p class="text-base sm:text-lg text-slate-500 mt-2">Descubra como pequenos hábitos transformam sua vida e energia</p>
-        </header>
-    
-        <main class="space-y-8">
-            <img src="https://www.bayer.com.br/sites/bayer_com_br/files/inline-images/bem-estar-ganha-mais-relevancia_0.png" alt="Mulher sorrindo, transmitindo vitalidade e energia." class="rounded-xl w-full h-auto shadow-md transform transition-transform duration-300 hover:scale-105">
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-microscope"></i> QUIZ REVELA: Por que Você Não Emagrece Mesmo Fazendo Tudo Certo?</h1>
+            <p>Se você se sente sabotada pelo seu próprio corpo, este quiz de 3 perguntas tem a resposta.</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        
+        <div class="question-container active" id="question-1">
+            <div class="question-text">1. Você se sente exausta e com o metabolismo lento, mesmo dormindo bem?</div>
+            <div class="options-container">
+                <div class="option" onclick="selectOption(1, 3)">Sim, sinto que meu corpo está sempre lento.</div>
+                <div class="option" onclick="selectOption(1, 2)">Às vezes, principalmente após as refeições.</div>
+                <div class="option" onclick="selectOption(1, 1)">Raramente me sinto cansada ou com metabolismo lento.</div>
+            </div>
+            <div class="nav-buttons">
+                <div></div>
+                <button class="nav-button next" onclick="nextQuestion(1)">Próxima <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        
+        <div class="question-container" id="question-2">
+            <div class="question-text">2. Sua pele e cabelos estão mais secos ou você sente inchaço e ganho de peso inexplicável?</div>
+            <div class="options-container">
+                <div class="option" onclick="selectOption(2, 3)">Sim, percebi uma queda na qualidade da pele e me sinto inchada.</div>
+                <div class="option" onclick="selectOption(2, 2)">Às vezes, mas pode ser sazonal.</div>
+                <div class="option" onclick="selectOption(2, 1)">Não, meu cabelo, pele e peso estão normais.</div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button prev" onclick="prevQuestion(2)"><i class="fas fa-arrow-left"></i> Anterior</button>
+                <button class="nav-button next" onclick="nextQuestion(2)">Próxima <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        
+        <div class="question-container" id="question-3">
+            <div class="question-text">3. Você já foi diagnosticada com hipotireoidismo ou já tentou de tudo para emagrecer sem sucesso?</div>
+            <div class="options-container">
+                <div class="option" onclick="selectOption(3, 3)">Sim, já tenho o diagnóstico e me frustro com o peso.</div>
+                <div class="option" onclick="selectOption(3, 2)">Suspeito de ter, ou já tentei várias dietas sem resultado.</div>
+                <div class="option" onclick="selectOption(3, 1)">Não, nunca tive problemas na tireoide e consigo emagrecer.</div>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-button prev" onclick="prevQuestion(3)"><i class="fas fa-arrow-left"></i> Anterior</button>
+                <button class="nav-button next" onclick="showResults()">Ver Resultado <i class="fas fa-chart-line"></i></button>
+            </div>
+        </div>
+        
+        <div class="results-container" id="results">
+            <div class="results-title">O SEU DIAGNÓSTICO</div>
             
-            <p class="text-lg text-slate-700 leading-relaxed">
-                Neste guia, exploramos como pequenas mudanças diárias podem ter um impacto significativo na sua vitalidade e no seu estado de espírito. Afinal, cuidar de si mesmo é o primeiro passo para uma vida mais equilibrada e feliz.
-            </p>
-    
-            <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-md shadow-inner">
-                <h3 class="font-semibold text-blue-800 text-xl mb-3">O Poder de Pequenos Hábitos</h3>
-                <ul class="space-y-3 text-slate-600">
-                    <li class="flex items-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span class="text-lg">
-                            <strong>Alimentação Consciente:</strong> Nutrir o corpo com alimentos integrais e frescos é o combustível para um dia cheio de energia.
-                        </span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                        <span class="text-lg">
-                            <strong>Movimento Leve:</strong> Uma caminhada diária ou alguns minutos de alongamento podem fazer toda a diferença na sua disposição.
-                        </span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span class="text-lg">
-                            <strong>Mente em Equilíbrio:</strong> Práticas como meditação ou alguns minutos de silêncio ajudam a acalmar a mente e reduzir o estresse.
-                        </span>
-                    </li>
+            <div class="results-score" id="results-score">
+                <!-- Resultado será inserido aqui via JavaScript -->
+            </div>
+            
+            <div class="results-description">
+                <p>O seu metabolismo lento e a sua dificuldade em emagrecer não são sua culpa. É o seu hipotireoidismo que está sabotando todos os seus esforços.</p>
+                <p>Mas, por anos, a indústria da saúde te enganou, te fazendo acreditar que o problema era você e sua "falta de disciplina".</p>
+                <p>Nós descobrimos a verdade: o emagrecimento para mulheres com hipotireoidismo depois dos 40 precisa de um protocolo específico. Não é só sobre comer menos e se exercitar mais.</p>
+            </div>
+            
+            <div class="urgency-banner">
+                <i class="fas fa-exclamation-triangle"></i> VOCÊ PRECISA DA VERDADE. Mais de 90% das mulheres na sua situação estão usando métodos que nunca funcionarão.
+            </div>
+            
+            <div class="solution-box">
+                <h3><i class="fas fa-lock-open"></i> O Protocolo Brutalmente Eficaz</h3>
+                <p>Nosso método não faz rodeios. Ele ataca a raiz do problema:</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Reprograma seu metabolismo para queimar gordura</li>
+                    <li><i class="fas fa-check-circle"></i> Reduz a inflamação que te impede de emagrecer</li>
+                    <li><i class="fas fa-check-circle"></i> Acelera a função da sua tireoide</li>
+                    <li><i class="fas fa-check-circle"></i> Devolve sua energia e disposição</li>
                 </ul>
             </div>
-    
-            <p class="text-lg text-slate-700 leading-relaxed">
-                Essas são algumas das chaves para desbloquear seu potencial de bem-estar. A jornada para uma vida mais saudável é única para cada pessoa, mas começa sempre com a vontade de se cuidar.
-            </p>
 
-            <!-- Este é o botão para redirecionar para a página 'black' -->
-            <a href="https://SEU-DOMINIO-BLACK.com.br" class="block w-full text-center py-4 px-6 bg-primary text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105">
-                Clique para Começar Sua Jornada
-            </a>
-        </main>
+            <!-- Seção de Depoimento para quebrar objeções -->
+            <div class="testimonial-box">
+                <p>"Não podia acreditar na diferença que senti em apenas duas semanas. Achei que seria mais uma dieta, mas meu corpo finalmente respondeu. A energia voltou e a balança está voltando a baixar! Valeu cada centavo."</p>
+                <div class="author">- Maria S., 45 anos</div>
+            </div>
+
+            <!-- Seção de FAQ para quebrar objeções -->
+            <div class="faq-box">
+                <h3>DÚVIDAS FREQUENTES</h3>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Já tentei de tudo. Por que este método é diferente? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        A maioria dos métodos genéricos ignora a causa raiz da sua dificuldade: a tireoide. O Protocolo Brutalmente Eficaz foi criado especificamente para reprogramar o metabolismo de mulheres com hipotireoidismo, combatendo a inflamação e a lentidão que os outros métodos não conseguem.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        É só mais uma dieta restritiva? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Não. Este é um protocolo que vai além de "contar calorias". Ele foca em alimentos, hábitos e estratégias que trabalham a favor da sua tireoide e não contra ela. Você aprenderá a fazer as escolhas certas para que seu corpo volte a funcionar como uma máquina de queimar gordura.
+                    </div>
+                </div>
+            </div>
+
+            <div class="urgency-banner">
+                <i class="fas fa-bolt"></i> ÚLTIMA CHANCE: Acesso Completo por Apenas R$ 29,90 (valor que pode subir a qualquer segundo).
+            </div>
+            
+            <button class="cta-button" onclick="redirectToSalesPage()">
+                <i class="fas fa-dollar-sign"></i> QUERO ACESSAR AGORA - R$ 29,90
+            </button>
+            
+            <div style="margin-top: 20px; font-size: 0.9rem;">
+                <p><i class="fas fa-shield-alt"></i> Compra 100% segura | Garantia incondicional de 7 dias</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Todos os direitos reservados. Este conteúdo é informativo e não substitui o aconselhamento médico profissional.</p>
+        </div>
     </div>
 
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 3;
+        let userScore = 0;
+        const selectedOptions = {};
+        
+        function updateProgressBar() {
+            const progressPercentage = ((currentQuestion - 1) / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = progressPercentage + '%';
+        }
+        
+        function selectOption(questionNumber, score) {
+            const options = document.querySelectorAll(`#question-${questionNumber} .option`);
+            options.forEach(option => option.classList.remove('selected'));
+            
+            event.target.classList.add('selected');
+            selectedOptions[questionNumber] = score;
+        }
+        
+        function nextQuestion(current) {
+            if (!selectedOptions[current]) {
+                return;
+            }
+            if (current >= totalQuestions) return;
+            
+            document.getElementById(`question-${current}`).classList.remove('active');
+            document.getElementById(`question-${current + 1}`).classList.add('active');
+            currentQuestion = current + 1;
+            updateProgressBar();
+        }
+        
+        function prevQuestion(current) {
+            if (current <= 1) return;
+            
+            document.getElementById(`question-${current}`).classList.remove('active');
+            document.getElementById(`question-${current - 1}`).classList.add('active');
+            currentQuestion = current - 1;
+            updateProgressBar();
+        }
+        
+        function showResults() {
+            if (!selectedOptions[totalQuestions]) {
+                return;
+            }
+
+            userScore = 0;
+            for (let i = 1; i <= totalQuestions; i++) {
+                userScore += selectedOptions[i] || 0;
+            }
+            
+            let resultText = '';
+            if (userScore >= 7) {
+                resultText = '<strong>O seu diagnóstico é claro:</strong> A sua luta contra o peso é uma consequência direta do seu hipotireoidismo. Você precisa de um método que ataque a raiz do problema, e não apenas os sintomas.';
+            } else if (userScore >= 4) {
+                resultText = '<strong>O seu metabolismo está sob ataque:</strong> Seu corpo está em guerra com a tireoide, te impedindo de emagrecer. Você precisa de um plano que não lute contra, mas sim trabalhe com o seu corpo.';
+            } else {
+                resultText = '<strong>Você está no caminho certo:</strong> Seus sintomas são leves, mas o risco de um metabolismo sabotado ainda existe. Nosso protocolo pode te ajudar a prevenir problemas futuros e otimizar a sua saúde.';
+            }
+            
+            document.getElementById('results-score').innerHTML = `<p>${resultText}</p>`;
+            
+            document.querySelectorAll('.question-container').forEach(q => q.classList.remove('active'));
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('progress-bar').style.width = '100%';
+            
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead');
+            }
+        }
+        
+        function redirectToSalesPage() {
+            window.location.href = 'https://metabolize.online';
+        }
+
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = event.target.closest('.faq-item');
+                parent.classList.toggle('open');
+            });
+        });
+        
+        updateProgressBar();
+    </script>
 </body>
 </html>
