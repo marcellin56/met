@@ -405,16 +405,37 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
             .container {
                 border-radius: 0;
                 box-shadow: none;
-                padding: 0;
+            }
+            .header {
+                padding: 20px;
             }
             .header h1 {
                 font-size: 1.8rem;
             }
+            .header p {
+                font-size: 1rem;
+            }
+            .progress-container {
+                margin: 15px 20px;
+            }
+            .question-container {
+                padding: 20px;
+            }
             .question-text {
                 font-size: 1.3rem;
+            }
+            .options-container {
+                gap: 10px;
+            }
+            .option {
+                padding: 15px;
+                font-size: 0.9rem;
             }
             .nav-buttons {
                 flex-direction: column;
@@ -422,10 +443,38 @@
             }
             .nav-button {
                 width: 100%;
+                font-size: 1rem;
+            }
+            .results-container {
+                padding: 20px;
+            }
+            .results-title {
+                font-size: 1.8rem;
+            }
+            .results-score, .results-description {
+                font-size: 1rem;
+            }
+            .solution-box, .testimonial-box, .faq-box {
+                padding: 20px;
+            }
+            .solution-box h3, .faq-box h3 {
+                font-size: 1.5rem;
+            }
+            .solution-box li {
+                font-size: 0.9rem;
+            }
+            .testimonial-box p {
+                font-size: 1rem;
+            }
+            .faq-question {
+                font-size: 1rem;
             }
             .cta-button {
                 font-size: 1.1rem;
                 padding: 15px 30px;
+            }
+            .urgency-banner {
+                font-size: 1rem;
             }
         }
     </style>
